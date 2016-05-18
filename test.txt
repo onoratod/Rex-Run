@@ -1,0 +1,3 @@
+danny, 200
+kami, 20
+pest, 500
