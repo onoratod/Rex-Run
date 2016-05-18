@@ -1,0 +1,91 @@
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+CIS 120 Game Project Proposal
+PennKey: onoratod
+Name of TA you consulted with: Becky
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+===============
+=: Your Game :=
+===============
+
+- What game are you planning to implement? If it is a game of your own design,
+  or not especially well-known, provide a 2-3 sentence description of the game.
+
+I will try to implement Google’s T-Rex running game with more features and interaction, such as collectible score boosters, and a leaderboard feature.
+
+- What classes and interfaces do you plan to create? How will the different
+  components of your game (the model, the GUI, etc.) interact?
+
+I will have to model different obstacles that the T-Rex will avoid, as well as collectibles that will boost scores. The GUI will allow the use to control the T-Rex and I must interpret keyboard clicks to make the T-Rex jump, and update the Games visual state to show this jump. I will also have to keep track of score and the number of collectibles through collections, and I will have to generate and infinite running path for the T-Rex by recursively placing obstacles and collectibles.
+
+- What do you think will be the most challenging thing to implement?
+
+Generating new randomly placed obstacles as the user progresses and more complicated hit detection to decide when the user has hit an obstacle. 
+
+
+====================
+=: Core Concept 1 :=
+====================
+
+Concept 1: I/O
+
+- What specific feature of your game will be implemented using this concept?
+
+The leaderboard feature. I will need to read in username and score, and then write these out to a file that will be displayed when the user hits a button that should do so. 
+
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+I want to keep track of the scores of different games, so I need to save the game state outside of the implementation, i.e. in a file. This is not trivial as it requires both reading in user input, which I must check is valid, as well as writing it out to a file, and displaying it. 
+
+====================
+=: Core Concept 2 :=
+====================
+
+Concept 2: OO Design Inheritance
+
+- What specific feature of your game will be implemented using this concept?
+
+The different obstacles and collectibles will share many similar features and interactions with the use. For instance, when they are hit, they will have to update the visual game state, as well as score and or whether or not the game has ended. This means that they will inherit functions from each other, through a more general class known as intractable game objects. 
+
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+It makes sense because the obstacles and collectibles perform very similarly when the user interacts with them, they just update the game state in different ways. Therefore, it would be inefficient to have to rewrite similar code for each one. 
+
+
+====================
+=: Core Concept 3 :=
+====================
+
+Concept 3: Testable Component Collision
+
+- What specific feature of your game will be implemented using this concept?
+
+I need to be creating new and random obstacles in the user’s path. To do this I will create a recursive algorithm that redraws the path so that I don’t have to design an infinitely long obstacle course, as the algorithm will be designing it in real time.
+
+I could test collisions using tests, testing the different types of collisions.
+
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+The game could technically go on forever, and I cannot design a course that is that long, so it makes sense to have an algorithm that would constantly be creating the next part of the course with unique obstacle placement. This would allow for way less code and much better and unique user experience. 
+
+It makes sense to test this, because it is the one of the core features of the game. If collisions do not work properly, then the game will never end, or the user will never be able to collect the collectibles. There are many strange cases of collisions that need to be considered, hitting the top, the sides, with more precise collisions, testing if white space hits white space. 
+
+====================
+=: Core Concept 4 :=
+====================
+
+Concept 4: Collections
+
+- What specific feature of your game will be implemented using this concept?
+
+I will need to store collections of collectibles and obstacles. I will have an immutable collection of the different types of obstacles that my recursive algorithm can use to create new parts of the obstacle course. I will also need a mutable collection to store the collectibles the user gets throughout the course, then I will need to go through this collection to add these collectibles to the users score, as they will provide score boosts. These collections will let me keep track of the game state, as well as different objects my recursive algorithm will need. 
+
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+Since the collectibles affect the end score, I will have to keep track of the ones the user gets and store them in a collection, that I will run through afterwards to calculate the final score. This is the best way to keep track of the game state for that feature. For the obstacles, I want my algorithm to go through the collection of obstacles and place them randomly and in novel ways as the user progresses along the obstacle course. It will be convenient to have a few obstacles held in a collection, that the algorithm can go to for retrieval, and then place them into the actual game and update the game state. 
+
+
